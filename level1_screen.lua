@@ -130,10 +130,10 @@ local function DetermineAlternateAnswers()
 -- RESET ALL X POSITIONS OF ANSWER BOXES (because the x-position is changed when it is
 -- placed into the black box)
 -----------------------------------------------------------------------------------------
-    answerbox.x = display.contentWidth * 0.9
-    alternateAnswerBox1.x = display.contentWidth * 0.9
-    alternateAnswerBox2.x = display.contentWidth * 0.9
-    alternateAnswerBox3.x = display.contentWidth * 0.9
+    answerbox.x = display.contentWidth * 0.6
+    alternateAnswerBox1.x = display.contentWidth * 0.6
+    alternateAnswerBox2.x = display.contentWidth * 0.6
+    alternateAnswerBox3.x = display.contentWidth * 0.6
 
 
 end
@@ -238,6 +238,10 @@ end
 
 -- Function to Restart Level 1
 local function RestartLevel1()
+
+        incorrectText.text = "Number of incorrect = " .. tostring(incorrect)
+    correctText.text = "Number of correct = " .. tostring(correct)
+
     -- if the user answered 3 answers correct move to correct scene
     if (correct == 3) then
         YouWinTransitionLevel1()
@@ -493,8 +497,8 @@ function scene:create( event )
     bkg_image.height = display.contentHeight
 
     --the text that displays the question
-    questionText = display.newText( "" , 0, 0, native.systemFontBold, 120)
-    questionText.x = display.contentWidth * 0.3
+    questionText = display.newText( "" , 0, 0, native.systemFontBold, 100)
+    questionText.x = display.contentWidth * 0.2
     questionText.y = display.contentHeight * 0.9
 
     -- create the soccer ball and place it on the scene
@@ -513,6 +517,10 @@ function scene:create( event )
     alternateAnswerBox1 = display.newText("", display.contentWidth * 0.9, 0, native.systemFontBold, 110)
     alternateAnswerBox2 = display.newText("", display.contentWidth * 0.9, 0, native.systemFontBold, 110)
     alternateAnswerBox3 = display.newText("", display.contentWidth * 0.9, 0, native.systemFontBold, 110)
+    correctText = display.newText("", display.contentWidth/6, display.contentHeight/9*3, nil, 30)
+
+    -- make lives text 
+    incorrectText = display.newText("", display.contentWidth/6, display.contentHeight/9*3.5, nil, 30)
 
     -- set the x positions of each of the answer boxes
     answerboxPreviousX = display.contentWidth * 0.9
@@ -523,7 +531,7 @@ function scene:create( event )
 
     -- the black box where the user will drag the answer
     userAnswerBoxPlaceholder = display.newImageRect("Images/userAnswerBoxPlaceholder.png",  130, 130, 0, 0)
-    userAnswerBoxPlaceholder.x = display.contentWidth * 0.6
+    userAnswerBoxPlaceholder.x = display.contentWidth * 0.45
     userAnswerBoxPlaceholder.y = display.contentHeight * 0.9
     
     -----------------------------------------------------------------------------------------------------------
@@ -542,6 +550,8 @@ function scene:create( event )
 
     sceneGroup:insert( bkg_image ) 
     sceneGroup:insert( questionText ) 
+    sceneGroup:insert( correctText ) 
+    sceneGroup:insert( incorrectText ) 
     sceneGroup:insert( userAnswerBoxPlaceholder )
     sceneGroup:insert( answerbox )
     sceneGroup:insert( alternateAnswerBox1 )
